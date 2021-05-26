@@ -1,24 +1,13 @@
 import React, { Component } from 'react'
 
 export default class Form extends Component {
-    state = {
-        name: "",
-        numberOfCalories: "",
-        image: "",
-    };
 
     handleChange = (event) => {
-        console.log(event.target.value);
-        this.setState({
-            [event.target.name]: event.target.value,
-        })
+        this.props.callbackOnChgFn(event);
     }
     
     handleSubmit = (event) => {
-        console.log(event.target);
-        event.preventDefault();
-        console.log("I have been clicked!");
-        console.log(this.state);
+        this.props.callbackSubFn(event);
     }
     
     render() {
@@ -28,7 +17,7 @@ export default class Form extends Component {
                     <label htmlFor="name"></label>
                     <input
                         onChange={this.handleChange}
-                        value={this.state.name}
+                        value={this.props.name}
                         type="text"
                         name="name"
                         placeholder="name"
@@ -39,7 +28,7 @@ export default class Form extends Component {
                     <label htmlFor="numberOfCalories"></label>
                     <input
                         onChange={this.handleChange}
-                        value={this.state.calories}
+                        value={this.props.calories}
                         type="number"
                         name="numberOfCalories"
                         placeholder="number of calories"
@@ -50,7 +39,7 @@ export default class Form extends Component {
                     <label htmlFor="image"></label>
                     <input
                         onChange={this.handleChange}
-                        value={this.state.image}
+                        value={this.props.image}
                         type="text"
                         name="image"
                         placeholder="image"

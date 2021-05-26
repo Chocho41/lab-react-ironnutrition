@@ -10,7 +10,7 @@ const FoodBox = (props) => {
         props.callBackFn();
     }
 
-    console.log(this.props);
+    console.log(props);
     return (
         <div>
             <div className="box">
