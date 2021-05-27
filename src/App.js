@@ -59,6 +59,7 @@ export class App extends React.Component {
 
   render() {
     const filteredDishes = this.state.foods.filter((food) => {
+
       return food.name
         .toLowerCase()
         .includes(this.state.searchValue.toLowerCase());
@@ -71,8 +72,8 @@ export class App extends React.Component {
           callbackSearchFn={this.handleSearchValue}
         />
 
-        {this.state.foods.map((food) => {
-          return <FoodBox callBackFn={this.handleClickForm} food={filteredDishes} />;
+        {filteredDishes.map((food) => {
+          return <FoodBox callBackFn={this.handleClickForm} food={food} />;
         })}
         {this.state.isClick && (
           <Form
