@@ -5,9 +5,9 @@ import React from 'react'
 
 const FoodBox = (props) => {
 
-    const handClick = () => {
+    const handClick = (event) => {
         console.log("toto");
-        props.callBackFn();
+        props.callBackFn(event);
     }
 
     // console.log(props);
@@ -31,7 +31,8 @@ const FoodBox = (props) => {
             <div className="media-right">
               <div className="field has-addons">
                 <div className="control">
-                  <input className="input" type="number" value="1" />
+                  <input className="input" type="number" defaultValue={1}
+                 />
                 </div>
                 <div className="control">
                   <button onClick={handClick} className="button is-info">

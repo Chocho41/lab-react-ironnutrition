@@ -14,8 +14,8 @@ export class App extends React.Component {
     name: '',
     numberOfCalories: '',
     image: '',
-    newFood: {}, // pk this.setState({newFood: {name: this.state.name,calories: this.state.numberOfCalories,image: this.state.image,quantity: 1}}) est resté vide
     searchValue: "",
+    totalCal:0
   };
 
   handleChange = (event) => {
@@ -31,23 +31,41 @@ export class App extends React.Component {
     console.log('I have been clicked!');
     console.log(this.state);
     console.log(this.state.foods);
+    const newFood=  {
+      name: this.state.name,
+      calories: this.state.numberOfCalories,
+      image: this.state.image,
+      quantity: 1,
+    }
+
     this.setState({
-      foods: [
-        ...this.state.foods,
-        {
-          name: this.state.name,
-          calories: this.state.numberOfCalories,
-          image: this.state.image,
-          quantity: 1,
-        },
+      // without using newFood:
+      // foods: [
+      //   ...this.state.foods,
+      //   {
+      //     name: this.state.name,
+      //     calories: this.state.numberOfCalories,
+      //     image: this.state.image,
+      //     quantity: 1,
+      //   },
+      // ], 
+      // =>>>> plus by trying to edit newFood:{} an error was thrown as you where modifying a state and using it in the same expression (useState)
+        newFood: newFood,     
+        
+        foods: [
+        ...this.state.foods, newFood
       ],
       isClick: false,
     });
     console.log(foods);
   };
 
-  handleClickForm = () => {
+  handleClickForm = (event) => {
     this.setState({ isClick: true });
+    console.log(this.state);
+    console.log(this.state.foods);
+    console.log(event.target);
+    console.log(event.target.value);
   };
 
   handleSearchValue = (searchValue) => {
@@ -66,8 +84,7 @@ export class App extends React.Component {
     });
     return (
       <div className="App">
-
-        <Search
+<div> <Search
           value={this.state.searchValue}
           callbackSearchFn={this.handleSearchValue}
         />
@@ -80,7 +97,12 @@ export class App extends React.Component {
             callbackSubFn={this.handleSubmit}
             callbackOnChgFn={this.handleChange}
           />
-        )}
+        )}</div> 
+        <div>
+
+        </div>
+       
+        
       </div>
     );
   }
